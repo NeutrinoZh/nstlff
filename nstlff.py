@@ -22,15 +22,20 @@ def checkEntry(name: str, abs_name: str, is_folder: bool) -> bool:
         if is_match:
             is_match = checkName(rule)
             if not is_match:
-                print(f"Incorrect entry name: {abs_name}")
+                return False
             break
     else:
-        print(f"Incorrect entry name: {abs_name}")
+        return False
+    
+    return True
 
-for root, dirs, files in os.walk("./test/"):
-    for folder in dirs:
-        abs_path = os.path.join(root, folder)
-        checkEntry(folder, abs_path, True)
-    for file in files:
-        abs_path = os.path.join(root, file)
-        checkEntry(file, abs_path, False)
+if __name__ == "__main__":
+    for root, dirs, files in os.walk("./test/"):
+        for folder in dirs:
+            abs_path = os.path.join(root, folder)
+            if not checkEntry(folder, abs_path, True):
+                print(f"Folder '{folder}' in '{root}' does not match the specified pattern.")
+        for file in files:
+            abs_path = os.path.join(root, file)
+            if not checkEntry(file, abs_path, False):
+                print(f"File '{file}' in '{root}' does not match the specified pattern.")
