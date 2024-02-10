@@ -2,6 +2,7 @@
     "files.exclude": {
         ".pytest_cache": true,
         "**/__pycache__": true,
+        ".ruff_cache/": true
     },
     "python.analysis.extraPaths": [
         "./src"
