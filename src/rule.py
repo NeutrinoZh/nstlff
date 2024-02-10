@@ -1,14 +1,17 @@
 import re
 
+
 class Rule:
     def __init__(self, pattern, file_naming: str, folder_naming: str) -> None:
         self.pattern = pattern
         self.file_naming = file_naming
         self.folder_naming = folder_naming
 
+
 rules = [
     Rule(r".*", r"[a-z]*.test", r"[A-Z][a-zA-Z]*"),
 ]
+
 
 def checkEntry(name: str, abs_name: str, is_folder: bool) -> bool:
     def checkName(rule: Rule) -> bool:
@@ -25,5 +28,5 @@ def checkEntry(name: str, abs_name: str, is_folder: bool) -> bool:
             break
     else:
         return False
-    
+
     return True
