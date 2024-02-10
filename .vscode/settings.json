@@ -1,0 +1,9 @@
+{
+    "files.exclude": {
+        ".pytest_cache": true,
+        "**/__pycache__": true,
+    },
+    "python.analysis.extraPaths": [
+        "./src"
+    ]
+}
