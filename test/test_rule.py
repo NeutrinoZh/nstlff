@@ -6,10 +6,14 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 's
 import rule
 
 def test_checkEntry():
-    assert rule.checkEntry("name.test", "./test/path/", False)
-    assert not rule.checkEntry("Name.test", "./test/path/", False)
-    assert not rule.checkEntry("name", "./test/path/", False)
+    ruleset = rule.RuleSet([
+        rule.Rule(r".*", r"[a-z]*.test", r"[A-Z][a-zA-Z]*"),
+    ])
 
-    assert rule.checkEntry("Name", "./test/path/", True)
-    assert not rule.checkEntry("name.test", "./test/path/", True)
-    assert not rule.checkEntry("name", "./test/path/", True)
+    assert ruleset.checkEntry("name.test", "./test/path/", False)
+    assert not ruleset.checkEntry("Name.test", "./test/path/", False)
+    assert not ruleset.checkEntry("name", "./test/path/", False)
+
+    assert ruleset.checkEntry("Name", "./test/path/", True)
+    assert not ruleset.checkEntry("name.test", "./test/path/", True)
+    assert not ruleset.checkEntry("name", "./test/path/", True)
